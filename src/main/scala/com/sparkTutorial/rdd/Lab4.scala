@@ -56,7 +56,7 @@ object Lab4 {
     // Task 1
     //Знайти авіакомпанію з найбільшою сумою відстаней всіх рейсів. Теж саме з
     //найменшою сумою
-    //graph.edges.groupBy()
+
 
     // Task 2
     //Знайти всі можливі рейси між Україною та Італією (при не більше ніж 2-х
@@ -78,8 +78,12 @@ object Lab4 {
       .filter(param => param != null)
       .filter(param => param._2 != null)
       .filter(param => {
-        val lookup = graph.vertices.lookup(param._1)
-        lookup.nonEmpty && param._2.size <= 2 && lookup.head._3.equals(ukraine)
+        if (param == null || param._2 == null) {
+          false
+        } else {
+          val lookup = vertsAirports.lookup(param._1)
+          lookup.nonEmpty && param._2.size <= 2 && lookup.head._3.equals(ukraine)
+        }
       }).collect()
     println("#2: " + res2.length)
 
@@ -120,9 +124,6 @@ object Lab4 {
     //    }
     //
     //    println("#4: " + dijkstra(graph, 1L).vertices.map(_._2).collect)
-
-
-    //val res1 = lib.ShortestPaths.run(graph, Array(1L)).vertices.filter(param => param._2.isEmpty).collect()
 
 
     //lib.TriangleCount.run(graph)
